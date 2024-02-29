@@ -57,3 +57,39 @@ function createHaikuFile(filePath) {
 // createHaikuFile("./data/haiku.txt")
 
 // updatedContent = content.replace(url, updatedUrl)
+
+function updateLinkInFile(filePath, oldLink, newLink) {
+    rl.close()
+    fs.readFile(filePath, "utf-8", (err, data) => {
+        if (err) {
+          console.error("Fel vid inläsning av fil:", err);
+          return;
+        }
+        const replacedText = data.replace(oldLink, newLink)
+        if (data === replacedText) {
+            return console.log("Text to replace was not found")
+        }
+
+        fs.writeFile(filePath, replacedText, "utf-8", (err) => {
+            if (err) {
+                console.error("Fel vid uppdatering av fil:", err);
+                return;
+            }
+            console.log("Filen har updatertas")
+        })
+    })
+}
+
+// updateLinkInFile("./data/text.txt", "https://google.new", "https://google.nu")
+
+function removeFile(filePath) {
+    fs.unlink(filePath, (err) => {
+        if (err) {
+            console.error("Fel vid borttagning av fil:", err);
+            return;
+        }
+        console.log("Filen har tagits bort")
+    })
+}
+
+removeFile("./data/29_feb.txt")
