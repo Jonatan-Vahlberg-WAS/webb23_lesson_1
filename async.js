@@ -72,4 +72,4 @@ async function findWordOccurenceAsyncAwait(filePath, word = "") {
     }
 }
 
-findWordOccurenceAsyncAwait("./data/green_eggs_and_ham.txt", "sam");
+findWordOccurenceAsyncAwait("./data/green_eggs_and_ham.txt", "");
