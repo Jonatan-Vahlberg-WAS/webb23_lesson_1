@@ -56,11 +56,20 @@ async function findWordOccurenceAsyncAwait(filePath, word = "") {
     word = word.toLowerCase()
     try {
         const data = await fs_promise.readFile(filePath, 'utf-8');
-        console.log(data.length)
+        const rows = data.trim().toLowerCase().split("\n")
+        const words = rows.map(row => row.split(" ")).flat(1)
+        const trimmedWords = words.map(w => (
+            w.replace(".", "")
+                .replace("?", "")
+                .replace("!", "")
+                .replace("\n","")
+        ))
+        const occurences = trimmedWords.filter((w) => w === word).length;
+        console.log(`${word} appears ${occurences} times`)
     }
     catch (err) {
         console.error("Fel vid läsning av filen:", err);
     }
 }
 
-findWordOccurenceAsyncAwait("./data/green_eggs_and_ham.txt", "ham");
+findWordOccurenceAsyncAwait("./data/green_eggs_and_ham.txt", "sam");
