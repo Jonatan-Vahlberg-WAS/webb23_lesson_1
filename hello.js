@@ -69,8 +69,22 @@ function addToItems() {
         return console.log("max items")
     }
 
-    rl.question("Add product: ", (product) => {
-        items.push(product)
+    rl.question("Add product: ", (productName) => {
+        if (productName === "") {
+            rl.close()
+            return console.log("Purchase ended")
+        }
+        const productIndex = items.findIndex((item) => item.name === productName)
+        if (productIndex !== -1) {
+            items[productIndex].quantity += 1 
+        }
+        else {
+            items.push({
+                name: productName,
+                quantity: 1
+            })
+        }
+
         console.log("Items: ", items)
         return addToItems()
     })
@@ -81,6 +95,7 @@ addToItems()
 // Uppgift 2 Låt användaren avbryta köpet om den skickar "" som inmatning
 
 // Uppgift extra 1 byt ut sträng mot  produkt object  som innehåller namn och hur många och om en annvändare "scannar/rl" in samma produkt öka antalet.
+
 
 
 
