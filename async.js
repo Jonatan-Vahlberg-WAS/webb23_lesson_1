@@ -50,3 +50,17 @@ function readCSVRowsPromise(filePath) {
 // readCSVRowsPromise("./data/username.csv")
 
 
+
+async function findWordOccurenceAsyncAwait(filePath, word = "") {
+    if(!word) return console.log("No word submitted")
+    word = word.toLowerCase()
+    try {
+        const data = await fs_promise.readFile(filePath, 'utf-8');
+        console.log(data.length)
+    }
+    catch (err) {
+        console.error("Fel vid läsning av filen:", err);
+    }
+}
+
+findWordOccurenceAsyncAwait("./data/green_eggs_and_ham.txt", "ham");
